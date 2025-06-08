@@ -51,8 +51,3 @@ See `package.json` for available scripts (build, dev, lint, etc.).
 MIT (or specify your license here)
 
 ---
-
-For more details and the full file structure, view the repo:  
-https://github.com/MurugeshAravind/zustand-demo/tree/main
-
-Let me know if you want a more detailed README or information about specific files!
