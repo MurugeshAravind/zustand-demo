@@ -1,25 +1,31 @@
 import { useEffect } from "react";
 import { useFundDetailsStore } from "../../store/useFundDetailsStore";
+import Loader from "../Loader/Loader";
 
 const CardDetails = ({ id }: { id: number }): React.JSX.Element => {
-  const { fund, fetchFundDetails, loading } = useFundDetailsStore();
+  const { funds, fetchFundDetails, loading } = useFundDetailsStore();
+  const fund = funds[id];
+
   useEffect(() => {
     fetchFundDetails(id);
   }, [id, fetchFundDetails]);
+
   return (
-    <div >
-      {loading ? (
-        <div className="loader">Loading...</div>
+    <>
+      {loading && !fund ? (
+        <Loader color="teal" size={40} />
       ) : (
-        <div>
-          <p>Scheme Code: {fund?.meta?.scheme_code ?? "N/A"}</p>
-          <p>Scheme Name: {fund?.meta?.scheme_name ?? "N/A"}</p>
-          <p>Fund House: {fund?.meta?.fund_house ?? "N/A"}</p>{" "}
-          <p>Scheme Category: {fund?.meta?.scheme_category ?? "N/A"}</p>
-          <p>Scheme Type: {fund?.meta?.scheme_type ?? "N/A"}</p>{" "}
-        </div>
+        fund && (
+          <div className="mb-[20px]">
+            <p><span className="font-bold text-teal-500">Scheme Code:</span> {fund.meta.scheme_code}</p>
+            <p><span className="font-bold text-teal-500">Scheme Name:</span> {fund.meta.scheme_name}</p>
+            <p><span className="font-bold text-teal-500">Fund House:</span> {fund.meta.fund_house}</p>
+            <p><span className="font-bold text-teal-500">Scheme Category:</span> {fund.meta.scheme_category}</p>
+            <p><span className="font-bold text-teal-500">Scheme Type:</span> {fund.meta.scheme_type}</p>
+          </div>
+        )
       )}
-    </div>
+    </>
   );
 };
 

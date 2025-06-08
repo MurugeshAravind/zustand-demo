@@ -8,13 +8,18 @@ const Card = ({ schemeCode, schemeName }: SchemeDetails): React.JSX.Element => {
     setShowDetails(!showDetails);
   };
   return (
-    <div className="text-center mt-[10px] border border-teal-500">
-      <h2 className="text-lg font-semibold mb-2">{schemeCode}</h2>
-      <p>{schemeName}</p>
-      <span className="font-bold text-grey-100" onClick={handleClick}>
+    <div className="text-center mt-2 border border-teal-500 p-4 rounded shadow-md min-h-[250px] flex flex-col justify-between">
+      {showDetails ? (
+        <CardDetails id={schemeCode} />
+      ) : (
+        <>
+          <h2 className="text-lg font-semibold mb-2">{schemeCode}</h2>
+          <p>{schemeName}</p>
+        </>
+      )}
+      <button className="font-bold text-teal-600" onClick={handleClick}>
         {!showDetails ? "Show Fund Details" : "Hide Fund Details"}
-      </span>
-      {showDetails ? <CardDetails id={schemeCode} /> : null}
+      </button>
     </div>
   );
 };

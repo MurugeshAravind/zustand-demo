@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useSchemeDetailsStore } from "../../store/useSchemeDetailsStore";
 import Card from "../Card/Card";
 import type { SchemeDetails } from "../../types/scheme";
+import Loader from "../Loader/Loader";
 
 const SearchBox: React.FC = () => {
   const { query, setQuery, scheme, fetchSchemeDetails, loading } =
@@ -20,7 +21,7 @@ const SearchBox: React.FC = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center w-full mt-[100px]">
+      <div className="flex items-center justify-center w-full mt-[50px] mb-[50px]">
         <input
           type="text"
           className="text-center w-[80%] sm:w-1/2 md:w-1/2 lg:w-1/2 p-[5px] border border-grey-500"
@@ -28,10 +29,10 @@ const SearchBox: React.FC = () => {
           onChange={(e) => {
             setQuery(e.target.value);
           }}
-          placeholder="Enter any mutual fund name"
+          placeholder="Enter any fund name"
         />
-        <span
-          className="relative right-[30px]"
+        <button
+          className="absolute ml-[50%] md:ml-[45%] sm:ml-[45%] xs:ml-[50%]"
           onClick={() => {
             if (query?.trim()?.length > 0) {
               setQuery("");
@@ -40,22 +41,21 @@ const SearchBox: React.FC = () => {
           }}
         >
           ❌
-        </span>
+        </button>
       </div>
-      {loading && (
-        <div className="flex items-center justify-center h-screen w-full">
-          <div className="loader">Loading...</div>
+      {loading ? (
+        <Loader color="grey" size={80} />
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {scheme.map((item: SchemeDetails, index: number) => (
+            <Card
+              key={`${item.schemeCode}_${index}`}
+              schemeCode={item.schemeCode}
+              schemeName={item.schemeName}
+            />
+          ))}
         </div>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {scheme.map((item: SchemeDetails, index: number) => (
-          <Card
-            key={`${item.schemeCode}_${index}`}
-            schemeCode={item.schemeCode}
-            schemeName={item.schemeName}
-          />
-        ))}
-      </div>
     </>
   );
 };
