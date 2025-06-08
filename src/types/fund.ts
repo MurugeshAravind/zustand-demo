@@ -16,6 +16,6 @@ type FundData = {
 
 export interface FundDetails {
   meta: FundMeta;
-  data: FundData;
+  data: FundData[];
   status: string;
 };

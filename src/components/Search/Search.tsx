@@ -9,15 +9,27 @@ const SearchBox: React.FC = () => {
   const { query, setQuery, scheme, fetchSchemeDetails, loading } =
     useSchemeDetailsStore();
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value?.trim()?.length < 0) {
+      setQuery("");
+      fetchSchemeDetails("");
+    }
+    setQuery(value);
+  };
+
   useEffect(() => {
     let timer = 0;
     if (query.length > 0) {
       timer = setTimeout(() => {
         fetchSchemeDetails(query);
       }, 300);
+    } else {
+      setQuery("");
+      fetchSchemeDetails("");
     }
     return () => clearTimeout(timer);
-  }, [query, fetchSchemeDetails]);
+  }, [query, setQuery, fetchSchemeDetails]);
 
   return (
     <>
@@ -26,9 +38,7 @@ const SearchBox: React.FC = () => {
           type="text"
           className="text-center w-[80%] sm:w-1/2 md:w-1/2 lg:w-1/2 p-[5px] border border-grey-500"
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
+          onChange={handleChange}
           placeholder="Enter any fund name"
         />
         <button

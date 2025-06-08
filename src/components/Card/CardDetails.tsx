@@ -17,11 +17,12 @@ const CardDetails = ({ id }: { id: number }): React.JSX.Element => {
       ) : (
         fund && (
           <div className="mb-[20px]">
-            <p><span className="font-bold text-teal-500">Scheme Code:</span> {fund.meta.scheme_code}</p>
-            <p><span className="font-bold text-teal-500">Scheme Name:</span> {fund.meta.scheme_name}</p>
-            <p><span className="font-bold text-teal-500">Fund House:</span> {fund.meta.fund_house}</p>
-            <p><span className="font-bold text-teal-500">Scheme Category:</span> {fund.meta.scheme_category}</p>
-            <p><span className="font-bold text-teal-500">Scheme Type:</span> {fund.meta.scheme_type}</p>
+            <p><span className="font-bold text-teal-500">Scheme Code:</span> {fund?.meta?.scheme_code}</p>
+            <p><span className="font-bold text-teal-500">Scheme Name:</span> {fund?.meta?.scheme_name}</p>
+            <p><span className="font-bold text-teal-500">Fund House:</span> {fund?.meta?.fund_house}</p>
+            <p><span className="font-bold text-teal-500">Scheme Category:</span> {fund?.meta?.scheme_category}</p>
+            <p><span className="font-bold text-teal-500">Scheme Type:</span> {fund?.meta?.scheme_type}</p>
+            <p><span className="font-bold text-teal-500">NAV:</span> {fund?.data[0].nav}</p>
           </div>
         )
       )}

@@ -13,8 +13,8 @@ const Card = ({ schemeCode, schemeName }: SchemeDetails): React.JSX.Element => {
         <CardDetails id={schemeCode} />
       ) : (
         <>
-          <h2 className="text-lg font-semibold mb-2">{schemeCode}</h2>
-          <p>{schemeName}</p>
+          <h2 className="text-lg font-semibold">{schemeName}</h2>
+          <img className="w-full h-auto" src="./mf.png" alt="fund" />
         </>
       )}
       <button className="font-bold text-teal-600" onClick={handleClick}>
