@@ -24,4 +24,4 @@ const Card = ({ schemeCode, schemeName }: SchemeDetails): React.JSX.Element => {
   );
 };
 
-export default Card;
+export default React.memo(Card);
