@@ -4,27 +4,36 @@ import type { FundDetails } from "../types/fund";
 
 interface FundDetailsStore {
   funds: Record<number, FundDetails>;
-  loading: boolean;
+  loading: Record<number, boolean>;
+  errors: Record<number, string>;
   fetchFundDetails: (id: number) => Promise<void>;
 }
 
 export const useFundDetailsStore = create<FundDetailsStore>((set, get) => ({
   funds: {},
-  loading: false,
+  loading: {},
+  errors: {},
   fetchFundDetails: async (id) => {
-    const existing = get().funds[id];
-    console.log(existing);
-    if (existing) return; // Skip if already fetched
-    set({ loading: true });
+    if (get().funds[id]) return;
+
+    set((state) => ({
+      loading: { ...state.loading, [id]: true },
+      errors: Object.fromEntries(
+        Object.entries(state.errors).filter(([key]) => key !== String(id))
+      ),
+    }));
+
     try {
       const data = await fetchFundDetailsAPI(id);
       set((state) => ({
         funds: { ...state.funds, [id]: data },
-        loading: false,
+        loading: { ...state.loading, [id]: false },
       }));
-    } catch (error) {
-      console.error("Failed to fetch scheme details:", error);
-      set({ loading: false });
+    } catch {
+      set((state) => ({
+        loading: { ...state.loading, [id]: false },
+        errors: { ...state.errors, [id]: "Failed to load fund details" },
+      }));
     }
   },
 }));

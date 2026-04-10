@@ -1,12 +1,12 @@
-// src/types/funds.ts
+// src/types/fund.ts
 type FundMeta = {
   fund_house: string,
   scheme_type: string,
   scheme_category: string,
   scheme_code: number,
   scheme_name: string,
-  isin_growth: boolean | null,
-  isin_div_reinvestment: boolean | null
+  isin_growth: string | null,
+  isin_div_reinvestment: string | null
 };
 
 type FundData = {
