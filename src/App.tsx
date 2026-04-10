@@ -33,7 +33,7 @@ function App() {
               </svg>
             </div>
             <span className="text-lg font-bold tracking-tight">
-              MF Explorer
+              FundScope
             </span>
           </div>
           <button
@@ -79,10 +79,11 @@ function App() {
         <div className="absolute inset-0 bg-grid-dots opacity-60" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 text-center">
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight italic">
-            Explore Indian Mutual Funds
+            Track. Compare. Invest Smarter.
           </h1>
           <p className="mt-4 text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Search thousands of schemes with real-time NAV data, powered by
+            Search thousands of Indian mutual fund schemes with real-time NAV
+            data, powered by
             <span className="font-semibold text-emerald-600 dark:text-emerald-400">
               {" "}
               Zustand{" "}
